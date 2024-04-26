@@ -43,4 +43,24 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
+    keyword_len = len(keyword)
+    keyword = keyword.lower()
+    alpha_len = 26
+    i = 0
+    for letter in ciphertext:
+
+        if letter.isalpha():
+
+            if letter.isupper():
+                plaintext += chr(ord("A") + ((ord(letter) - ord("A")) - (ord(keyword[i]) - ord("a"))) % alpha_len)
+            else:
+                plaintext += chr(ord("a") + ((ord(letter) - ord("a")) - (ord(keyword[i]) - ord("a"))) % alpha_len)
+
+            i += 1
+            if i == keyword_len:
+                i = 0
+
+        else:
+            plaintext += letter
+
     return plaintext
