@@ -80,5 +80,22 @@ class SudokuTestCase(unittest.TestCase):
             actual_block = sudoku.get_block(grid, pos)
             self.assertEqual(needed_block, actual_block)
 
+        def test_find_empty_positions(self):
+            grid = [['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']]
+            needed_pos = (0, 2)
+            actual_pos = sudoku.find_empty_positions(grid)
+            self.assertEqual(needed_pos, actual_pos)
+
+            grid = [['1', '2', '3'], ['4', '.', '6'], ['7', '8', '9']]
+            needed_pos = (1, 1)
+            actual_pos = sudoku.find_empty_positions(grid)
+            self.assertEqual(needed_pos, actual_pos)
+
+            grid = [['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']]
+            needed_pos = (2, 0)
+            actual_pos = sudoku.find_empty_positions(grid)
+            self.assertEqual(needed_pos, actual_pos)
+
+
 if __name__ == '__main__':
     unittest.main()
