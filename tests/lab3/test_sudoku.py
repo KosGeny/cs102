@@ -52,5 +52,33 @@ class SudokuTestCase(unittest.TestCase):
         actual_col = sudoku.get_col(puzzle, pos)
         self.assertEqual(needed_col, actual_col)
 
+        def test_get_block(self):
+            grid = [
+                ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+                ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+                ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+                ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+                ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+                ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+                ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+                ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+                ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
+            ]
+
+            pos = (0, 1)
+            needed_block = ['5', '3', '.', '6', '.', '.', '.', '9', '8']
+            actual_block = sudoku.get_block(grid, pos)
+            self.assertEqual(needed_block, actual_block)
+
+            pos = (4, 7)
+            needed_block = ['.', '.', '3', '.', '.', '1', '.', '.', '6']
+            actual_block = sudoku.get_block(grid, pos)
+            self.assertEqual(needed_block, actual_block)
+
+            pos = (8, 8)
+            needed_block = ['2', '8', '.', '.', '.', '5', '.', '7', '9']
+            actual_block = sudoku.get_block(grid, pos)
+            self.assertEqual(needed_block, actual_block)
+
 if __name__ == '__main__':
     unittest.main()
