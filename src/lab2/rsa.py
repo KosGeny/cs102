@@ -12,8 +12,17 @@ def is_prime(n: int) -> bool:
     >>> is_prime(8)
     False
     """
-    # PUT YOUR CODE HERE
-    pass
+    if n < 2:
+        return False
+    elif n == 2:
+        return True
+    else:
+        for i in range(2, int(n ** 0.5) + 1):
+            if n % i == 0:
+                return False
+
+    return True
+
 
 
 def gcd(a: int, b: int) -> int:
@@ -33,15 +42,15 @@ def gcd(a: int, b: int) -> int:
     return a + b
 
 
-def multiplicative_inverse(e: int, phi: int) -> int:
-    """
-    Euclid's extended algorithm for finding the multiplicative
-    inverse of two numbers.
-    >>> multiplicative_inverse(7, 40)
-    23
-    """
-    # PUT YOUR CODE HERE
-    pass
+# def multiplicative_inverse(e: int, phi: int) -> int:
+#     """
+#     Euclid's extended algorithm for finding the multiplicative
+#     inverse of two numbers.
+#     >>> multiplicative_inverse(7, 40)
+#     23
+#     """
+#     # PUT YOUR CODE HERE
+#     pass
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
