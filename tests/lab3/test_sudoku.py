@@ -33,5 +33,24 @@ class SudokuTestCase(unittest.TestCase):
         actual_row = sudoku.get_row(puzzle, pos)
         self.assertEqual(needed_row, actual_row)
 
+    def test_get_col(self):
+        puzzle = [['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']]
+        pos = (0, 0)
+        needed_col = ['1', '4', '7']
+        actual_col = sudoku.get_col(puzzle, pos)
+        self.assertEqual(needed_col, actual_col)
+
+        puzzle = [['1', '2', '3'], ['4', '.', '6'], ['7', '8', '9']]
+        pos = (0, 1)
+        needed_col = ['2', '.', '8']
+        actual_col = sudoku.get_col(puzzle, pos)
+        self.assertEqual(needed_col, actual_col)
+
+        puzzle = [['1', '2', '3'], ['4', '5', '6'], ['.', '8', '9']]
+        pos = (0, 2)
+        needed_col = ['3', '6', '9']
+        actual_col = sudoku.get_col(puzzle, pos)
+        self.assertEqual(needed_col, actual_col)
+
 if __name__ == '__main__':
     unittest.main()
