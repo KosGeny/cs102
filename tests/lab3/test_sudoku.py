@@ -96,6 +96,29 @@ class SudokuTestCase(unittest.TestCase):
             actual_pos = sudoku.find_empty_positions(grid)
             self.assertEqual(needed_pos, actual_pos)
 
+        def test_find_possible_values(self):
+            grid = [
+                ['5', '3', '.', '.', '7', '.', '.', '.', '.'],
+                ['6', '.', '.', '1', '9', '5', '.', '.', '.'],
+                ['.', '9', '8', '.', '.', '.', '.', '6', '.'],
+                ['8', '.', '.', '.', '6', '.', '.', '.', '3'],
+                ['4', '.', '.', '8', '.', '3', '.', '.', '1'],
+                ['7', '.', '.', '.', '2', '.', '.', '.', '6'],
+                ['.', '6', '.', '.', '.', '.', '2', '8', '.'],
+                ['.', '.', '.', '4', '1', '9', '.', '.', '5'],
+                ['.', '.', '.', '.', '8', '.', '.', '7', '9'],
+            ]
+
+            pos = (0, 2)
+            needed_values = {'1', '2', '4'}
+            actual_values = sudoku.find_possible_values(grid, pos)
+            self.assertEqual(needed_values, actual_values)
+
+            pos = (4, 7)
+            needed_values = {'2', '5', '9'}
+            actual_values = sudoku.find_possible_values(grid, pos)
+            self.assertEqual(needed_values, actual_values)
+
 
 if __name__ == '__main__':
     unittest.main()
