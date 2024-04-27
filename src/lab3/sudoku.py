@@ -75,7 +75,11 @@ def get_block(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -> tp.List[s
     >>> get_block(grid, (8, 8))
     ['2', '8', '.', '.', '.', '5', '.', '7', '9']
     """
-    pass
+
+    row_start = pos[0] // 3 * 3
+    col_start = pos[1] // 3 * 3
+
+    return [cell for row in grid[row_start : row_start + 3] for cell in row[col_start : col_start + 3]]
 
 
 def find_empty_positions(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.Tuple[int, int]]:
@@ -149,9 +153,10 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
 
 
 if __name__ == "__main__":
-    for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
+    for fname in ["puzzle1.txt", "puzzle1.txt", "puzzle1.txt"]:
         grid = read_sudoku(fname)
         display(grid)
+
         solution = solve(grid)
         if not solution:
             print(f"Puzzle {fname} can't be solved")
