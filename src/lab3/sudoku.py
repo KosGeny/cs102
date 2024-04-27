@@ -130,13 +130,49 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
     >>> solve(grid)
     [['5', '3', '4', '6', '7', '8', '9', '1', '2'], ['6', '7', '2', '1', '9', '5', '3', '4', '8'], ['1', '9', '8', '3', '4', '2', '5', '6', '7'], ['8', '5', '9', '7', '6', '1', '4', '2', '3'], ['4', '2', '6', '8', '5', '3', '7', '9', '1'], ['7', '1', '3', '9', '2', '4', '8', '5', '6'], ['9', '6', '1', '5', '3', '7', '2', '8', '4'], ['2', '8', '7', '4', '1', '9', '6', '3', '5'], ['3', '4', '5', '2', '8', '6', '1', '7', '9']]
     """
-    pass
+    pos = find_empty_positions(grid)
+    if not pos:
+        return grid if check_solution(grid) else None
+
+    possible_values = find_possible_values(grid, pos)
+
+    for value in possible_values:
+        last_value = grid[pos[0]][pos[1]]
+
+        grid[pos[0]][pos[1]] = value
+
+        solution = solve(grid)
+        if solution:
+            return solution
+
+        grid[pos[0]][pos[1]] = last_value
+
+    return None
 
 
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """Если решение solution верно, то вернуть True, в противном случае False"""
-    # TODO: Add doctests with bad puzzles
-    pass
+
+    n = len(solution)
+
+    for i in range(n):
+        row = set(get_row(solution, (i, 0)))
+        if '.' in row or len(row) != n:
+            return False
+
+        col = set(get_col(solution, (0, i)))
+        if '.' in col or len(col) != n:
+            return False
+
+    for i in range(0, n, 3):
+        for j in range(0, n, 3):
+            block = set(get_block(solution, (i, j)))
+            if '.' in block or len(block) != n:
+                return False
+
+    return True
+
+
 
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
@@ -164,11 +200,12 @@ def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
 
 
 if __name__ == "__main__":
-    for fname in ["puzzle1.txt", "puzzle1.txt", "puzzle1.txt"]:
+    for fname in ["puzzle1.txt", "puzzle2.txt", "puzzle3.txt"]:
         grid = read_sudoku(fname)
         display(grid)
 
         solution = solve(grid)
+        display(solution)
         if not solution:
             print(f"Puzzle {fname} can't be solved")
         else:
