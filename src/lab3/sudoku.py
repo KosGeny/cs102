@@ -109,7 +109,13 @@ def find_possible_values(grid: tp.List[tp.List[str]], pos: tp.Tuple[int, int]) -
     >>> values == {'2', '5', '9'}
     True
     """
-    pass
+
+    col = get_col(grid, pos)
+    row = get_row(grid, pos)
+    block = get_block(grid, pos)
+    digits = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+    return set([x for x in digits if x not in set(col + row + block)])
 
 
 def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
