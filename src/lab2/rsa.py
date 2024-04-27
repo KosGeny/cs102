@@ -14,15 +14,16 @@ def is_prime(n: int) -> bool:
     """
     if n < 2:
         return False
-    elif n == 2:
+
+    if n == 2:
         return True
-    else:
-        for i in range(2, int(n ** 0.5) + 1):
-            if n % i == 0:
-                return False
+
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+
 
     return True
-
 
 
 def gcd(a: int, b: int) -> int:
@@ -35,9 +36,9 @@ def gcd(a: int, b: int) -> int:
     """
     while a * b != 0:
         if a > b:
-            a, b = a % b, b
+            a = a % b
         else:
-            a, b = a, b % a
+            b = b % a
 
     return a + b
 
@@ -52,11 +53,11 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     a = phi
     b = e
 
-    table = [[a, b, a % b, a // b, None, None]]
+    table = [[a, b, a % b, a // b, 0, 0]]
 
     while a % b != 0:
         a, b = b, a % b
-        table.append([a, b, a % b, a // b, None, None])
+        table.append([a, b, a % b, a // b, 0, 0])
 
     table[-1][4] = 0
     table[-1][5] = 1
@@ -65,7 +66,7 @@ def multiplicative_inverse(e: int, phi: int) -> int:
         # x_i = y_(i+1)
         table[i][4] = table[i + 1][5]
 
-        #y_i = x_(i+1) - y_(i+1) * (a div b)_i
+        # y_i = x_(i+1) - y_(i+1) * (a div b)_i
         table[i][5] = table[i + 1][4] - table[i + 1][5] * table[i][3]
 
     return table[0][5] % phi
@@ -114,7 +115,7 @@ def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
     # Unpack the key into its components
     key, n = pk
     # Generate the plaintext based on the ciphertext and key using a^b mod m
-    plain = [chr((char ** key) % n) for char in ciphertext]
+    plain = [chr((char**key) % n) for char in ciphertext]
     # Return the array of bytes as a string
     return "".join(plain)
 
