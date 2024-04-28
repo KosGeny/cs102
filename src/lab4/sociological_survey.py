@@ -11,3 +11,12 @@ class Age_Group:
             return "101+"
 
         return f"{self.start}-{self.end}"
+
+
+class Respondent:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def str(self):
+        return f"{self.name} ({self.age})"
