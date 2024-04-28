@@ -20,3 +20,8 @@ class Respondent:
 
     def str(self):
         return f"{self.name} ({self.age})"
+
+
+def parse_age_groups(args):
+    age_groups = [-1] + [int(arg) for arg in args] + [123]
+    return [Age_Group(age_groups[i] + 1, age_groups[i + 1]) for i in range(len(age_groups) - 1)]
