@@ -72,11 +72,11 @@ def recommend_film(films, persons, current_user):
     recommended_movie_id = top_movies[randint(0, len(top_movies) - 1)]
     return films[recommended_movie_id].title
 
+if __name__ == "__main__":
+    film_db = Film_DB(PATH_TO_INPUT_FILMS)
+    user_db = User_DB(PATH_TO_INPUT_USERS)
 
-film_db = Film_DB(PATH_TO_INPUT_FILMS)
-user_db = User_DB(PATH_TO_INPUT_USERS)
+    current_user = User([int(film_id) for film_id in input().split(",")])
 
-current_user = User([int(film_id) for film_id in input().split(",")])
-
-recommended_movie = recommend_film(film_db.get_all(), user_db.get_all(), current_user)
-print(recommended_movie)
+    recommended_movie = recommend_film(film_db.get_all(), user_db.get_all(), current_user)
+    print(recommended_movie)

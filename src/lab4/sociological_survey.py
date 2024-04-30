@@ -50,17 +50,18 @@ def parse_age_groups(args):
     return [AgeGroup(age_groups[i] + 1, age_groups[i + 1]) for i in range(len(age_groups) - 1)]
 
 
-with open("age_groups.txt", "r", encoding="UTF-8") as f:
-    age_groups = parse_age_groups(map(int, f.readline().split()))
+if __name__ == "__main__":
+    with open("age_groups.txt", "r", encoding="UTF-8") as f:
+        age_groups = parse_age_groups(map(int, f.readline().split()))
 
-divider = AgeGroupDivider(age_groups)
+    divider = AgeGroupDivider(age_groups)
 
-with open("respondents.txt", "r", encoding="UTF-8") as f:
-    for line in f.readlines():
-        if line == "END":
-            break
-        name, age = line.split(",")
-        respondent = Respondent(name.strip(), int(age.strip()))
-        divider.add_respondent(respondent)
+    with open("respondents.txt", "r", encoding="UTF-8") as f:
+        for line in f.readlines():
+            if line == "END":
+                break
+            name, age = line.split(",")
+            respondent = Respondent(name.strip(), int(age.strip()))
+            divider.add_respondent(respondent)
 
-divider.display_groups()
+    divider.display_groups()
