@@ -1,14 +1,15 @@
 class AgeGroup:
-    def __init__(self, start, end):
+    def __init__(self, start, end, last=False):
         self.start = start
         self.end = end
+        self.last = last
 
     def contains(self, age):
         return self.start < age <= self.end
 
     def str(self):
-        if self.start == 101:
-            return "101+"
+        if self.last:
+            return f"{self.start}+"
 
         return f"{self.start}-{self.end}"
 
@@ -46,8 +47,14 @@ class AgeGroupDivider:
 
 
 def parse_age_groups(args):
-    age_groups = [-1] + [int(arg) for arg in args] + [123]
-    return [AgeGroup(age_groups[i] + 1, age_groups[i + 1]) for i in range(len(age_groups) - 1)]
+    ages = [-1] + [int(arg) for arg in args]
+    age_groups = []
+    for i in range(len(ages)):
+        if i == len(ages) - 1:
+            age_groups.append(AgeGroup(ages[i] + 1, 123, last=True))
+        else:
+            age_groups.append(AgeGroup(ages[i] + 1, ages[i + 1]))
+    return age_groups
 
 
 if __name__ == "__main__":
