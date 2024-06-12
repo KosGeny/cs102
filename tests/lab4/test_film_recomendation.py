@@ -4,11 +4,11 @@ import unittest
 from src.lab4.film_recomendation import *
 
 file_dir = os.path.dirname(os.path.realpath("__file__"))
-input_1 = os.path.join(file_dir, "../../src/lab4/input_1.txt")
+input_1 = os.path.join(file_dir, "../../src/lab4/films.txt")
 input_1 = os.path.abspath(os.path.realpath(input_1))
 
 file_dir = os.path.dirname(os.path.realpath("__file__"))
-input_2 = os.path.join(file_dir, "../../src/lab4/input_2.txt")
+input_2 = os.path.join(file_dir, "../../src/lab4/users.txt")
 input_2 = os.path.abspath(os.path.realpath(input_2))
 
 

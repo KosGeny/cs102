@@ -1,8 +1,8 @@
 from random import randint
 
 
-PATH_TO_INPUT_FILMS = "input_1.txt"
-PATH_TO_INPUT_USERS = "input_2.txt"
+PATH_TO_INPUT_FILMS = "films.txt"
+PATH_TO_INPUT_USERS = "users.txt"
 
 
 class User(list):
@@ -29,6 +29,7 @@ class User_DB(list):
         return users
 
     def get_all(self):
+        """Функция возвращает список пользователей с их просмотренными фильмами"""
         return self.users
 
 
@@ -46,10 +47,12 @@ class Film_DB(dict):
         return films
 
     def get_all(self):
+        """Функция возвращает список всех id фильмов"""
         return self.films
 
 
 def recommend_film(films, persons, current_user):
+    """Функция возвращает название рекомендованного фильма или сообщение об отсутствии рекомендаций"""
     film_views_count = {}
 
     user_films = set(current_user.films)

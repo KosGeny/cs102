@@ -5,9 +5,11 @@ class AgeGroup:
         self.last = last
 
     def contains(self, age):
+        """Функция проверяет, входит ли возраст в данную возрастную группу"""
         return self.start < age <= self.end
 
     def str(self):
+        """Функция возвращает строку с границами возрастной группы"""
         if self.last:
             return f"{self.start}+"
 
@@ -20,6 +22,7 @@ class Respondent:
         self.age = age
 
     def str(self):
+        """Функция возвращает строку с именем и возрастом респондента"""
         return f"{self.name} ({self.age})"
 
 
@@ -29,12 +32,14 @@ class AgeGroupDivider:
         self.grouped_respondents = {group: [] for group in self.age_groups}
 
     def add_respondent(self, respondent):
+        """Функция добавляет респондента в нужную возрастную группу"""
         for group in self.age_groups:
             if group.contains(respondent.age):
                 self.grouped_respondents[group].append(respondent)
                 break
 
     def display_groups(self):
+        """Функция выводит в корректном формате возрастные группы и респондентов"""
         for group in reversed(self.age_groups):
             if self.grouped_respondents[group]:
                 print(f"{group.str()}: ", end="")
@@ -47,6 +52,7 @@ class AgeGroupDivider:
 
 
 def parse_age_groups(args):
+    """Функция возвращает список возрастных групп, определяемых последовательностью возрастов"""
     ages = [-1] + [int(arg) for arg in args]
     age_groups = []
     for i in range(len(ages)):
