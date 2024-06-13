@@ -18,7 +18,7 @@ class TestUser(unittest.TestCase):
 
 class TestUserDB(unittest.TestCase):
     def setUp(self):
-        self.user_db = User_DB()
+        self.user_db = User_DB([User([2, 1, 3]), User([1, 4, 3]), User([2, 2, 2, 2, 2, 3])])
         self.users = self.user_db.get_all()
 
     def test_load_users(self):
@@ -28,7 +28,7 @@ class TestUserDB(unittest.TestCase):
 
 class TestFilmDB(unittest.TestCase):
     def setUp(self):
-        self.film_db = Film_DB()
+        self.film_db = Film_DB({1: Film("Мстители: Финал"), 2: Film("Хатико"), 3: Film("Дюна"), 4: Film("Унесённые призраками")})
         self.films = self.film_db.get_all()
 
     def test_load_films(self):
@@ -38,10 +38,10 @@ class TestFilmDB(unittest.TestCase):
 
 class TestRecommendFilm(unittest.TestCase):
     def setUp(self):
-        self.film_db = Film_DB()
+        self.film_db = Film_DB({1: Film("Мстители: Финал"), 2: Film("Хатико"), 3: Film("Дюна"), 4: Film("Унесённые призраками")})
         self.films = self.film_db.get_all()
 
-        self.user_db = User_DB()
+        self.user_db = User_DB([User([2, 1, 3]), User([1, 4, 3]), User([2, 2, 2, 2, 2, 3])])
         self.users = self.user_db.get_all()
 
         self.current_user = User([2, 4])

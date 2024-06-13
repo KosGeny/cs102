@@ -1,13 +1,8 @@
-import os
-
 from random import randint
 
 
-file_dir = os.path.dirname(os.path.realpath("__file__"))
-PATH_TO_INPUT_FILMS = os.path.join(file_dir, "films.txt")
-
-file_dir = os.path.dirname(os.path.realpath("__file__"))
-PATH_TO_INPUT_USERS = os.path.join(file_dir, "users.txt")
+PATH_TO_INPUT_FILMS = "films.txt"
+PATH_TO_INPUT_USERS = "users.txt"
 
 
 class User(list):
@@ -22,16 +17,9 @@ class Film:
 
 
 class User_DB(list):
-    def __init__(self):
+    def __init__(self, users):
         super().__init__()
-        self.users = self.__load_users()
-
-    def __load_users(self):
-        users = []
-        with open(PATH_TO_INPUT_USERS, "r", encoding="UTF-8") as f:
-            for line in f:
-                users.append(User([int(film_id) for film_id in line.strip().split(",")]))
-        return users
+        self.users = users
 
     def get_all(self):
         """Функция возвращает список пользователей с их просмотренными фильмами"""
@@ -39,17 +27,9 @@ class User_DB(list):
 
 
 class Film_DB(dict):
-    def __init__(self):
+    def __init__(self, films):
         super().__init__()
-        self.films = self.__load_films()
-
-    def __load_films(self):
-        films = {}
-        with open(PATH_TO_INPUT_FILMS, "r", encoding="UTF-8") as f:
-            for line in f:
-                film_id, film_title = line.strip().split(",")
-                films[int(film_id)] = Film(film_title)
-        return films
+        self.films = films
 
     def get_all(self):
         """Функция возвращает список всех id фильмов"""
@@ -81,8 +61,18 @@ def recommend_film(films, persons, current_user):
     return films[recommended_movie_id].title
 
 if __name__ == "__main__":
-    film_db = Film_DB()
-    user_db = User_DB()
+    films = {}
+    with open(PATH_TO_INPUT_FILMS, "r", encoding="UTF-8") as f:
+        for line in f:
+            film_id, film_title = line.strip().split(",")
+            films[int(film_id)] = Film(film_title)
+    film_db = Film_DB(films)
+
+    users = []
+    with open(PATH_TO_INPUT_USERS, "r", encoding="UTF-8") as f:
+        for line in f:
+            users.append(User([int(film_id) for film_id in line.strip().split(",")]))
+    user_db = User_DB(users)
 
     current_user = User([int(film_id) for film_id in input().split(",")])
 
