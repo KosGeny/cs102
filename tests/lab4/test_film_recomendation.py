@@ -18,7 +18,7 @@ class TestUser(unittest.TestCase):
 
 class TestUserDB(unittest.TestCase):
     def setUp(self):
-        self.user_db = User_DB("users.txt")
+        self.user_db = User_DB()
         self.users = self.user_db.get_all()
 
     def test_load_users(self):
@@ -28,7 +28,7 @@ class TestUserDB(unittest.TestCase):
 
 class TestFilmDB(unittest.TestCase):
     def setUp(self):
-        self.film_db = Film_DB("films.txt")
+        self.film_db = Film_DB()
         self.films = self.film_db.get_all()
 
     def test_load_films(self):
@@ -38,10 +38,10 @@ class TestFilmDB(unittest.TestCase):
 
 class TestRecommendFilm(unittest.TestCase):
     def setUp(self):
-        self.film_db = Film_DB("films.txt")
+        self.film_db = Film_DB()
         self.films = self.film_db.get_all()
 
-        self.user_db = User_DB("users.txt")
+        self.user_db = User_DB()
         self.users = self.user_db.get_all()
 
         self.current_user = User([2, 4])
