@@ -4,11 +4,11 @@ from random import randint
 
 
 file_dir = os.path.dirname(os.path.realpath("__file__"))
-PATH_TO_INPUT_FILMS = os.path.join(file_dir, "../../src/lab4/films.txt")
+PATH_TO_INPUT_FILMS = os.path.join(file_dir, "films.txt")
 PATH_TO_INPUT_FILMS = os.path.abspath(os.path.realpath(PATH_TO_INPUT_FILMS))
 
 file_dir = os.path.dirname(os.path.realpath("__file__"))
-PATH_TO_INPUT_USERS = os.path.join(file_dir, "../../src/lab4/users.txt")
+PATH_TO_INPUT_USERS = os.path.join(file_dir, "users.txt")
 PATH_TO_INPUT_USERS = os.path.abspath(os.path.realpath(PATH_TO_INPUT_USERS))
 
 
