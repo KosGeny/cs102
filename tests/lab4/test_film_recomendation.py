@@ -1,15 +1,6 @@
-import os
 import unittest
 
 from src.lab4.film_recomendation import *
-
-file_dir = os.path.dirname(os.path.realpath("__file__"))
-input_1 = os.path.join(file_dir, "../../src/lab4/films.txt")
-input_1 = os.path.abspath(os.path.realpath(input_1))
-
-file_dir = os.path.dirname(os.path.realpath("__file__"))
-input_2 = os.path.join(file_dir, "../../src/lab4/users.txt")
-input_2 = os.path.abspath(os.path.realpath(input_2))
 
 
 class TestFilm(unittest.TestCase):
@@ -27,7 +18,7 @@ class TestUser(unittest.TestCase):
 
 class TestUserDB(unittest.TestCase):
     def setUp(self):
-        self.user_db = User_DB(input_2)
+        self.user_db = User_DB("users.txt")
         self.users = self.user_db.get_all()
 
     def test_load_users(self):
@@ -37,7 +28,7 @@ class TestUserDB(unittest.TestCase):
 
 class TestFilmDB(unittest.TestCase):
     def setUp(self):
-        self.film_db = Film_DB(input_1)
+        self.film_db = Film_DB("films.txt")
         self.films = self.film_db.get_all()
 
     def test_load_films(self):
@@ -47,10 +38,10 @@ class TestFilmDB(unittest.TestCase):
 
 class TestRecommendFilm(unittest.TestCase):
     def setUp(self):
-        self.film_db = Film_DB(input_1)
+        self.film_db = Film_DB("films.txt")
         self.films = self.film_db.get_all()
 
-        self.user_db = User_DB(input_2)
+        self.user_db = User_DB("users.txt")
         self.users = self.user_db.get_all()
 
         self.current_user = User([2, 4])
